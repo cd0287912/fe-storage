@@ -47,15 +47,23 @@ function Counter() {
 
 ### 过时的状态
 
-有时候我们拿到的不是最新的状态的值，比如基于 count 设置新值的时候，我们当前拿到的 count 不是最新值。
-第二个改变值的函数可以接收一个函数，函数的参数是当前最新值，函数返回一个要设置的新值。
+有时候我们拿到的不是最新的状态的值，比如基于 count 设置新值的时候，我们当前拿到的 count 不是最新值。即所谓的闭包陷阱。
 
-```js
-setCount(count + 1);
+如下，没有正确设置 deps 数组的值，count 始终没有变，但是设置了 deps 也有问题，因为 count 每次改变都会重新生成一个定时器。
+
+解决的办法:1.setCount 接收一个函数来改变值。2. 可以使用 useReducer 来规避 useEffect 里面引用状态变量
+
+```jsx
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+    return () => {
+      timer && clearInterval(timer);
+    };
+  }, []);
+  return <div>{count}</div>;
+}
 ```
-
-```js
-setCount((count) => count + 1);
-```
-
-这样使用函数来返回新状态的方法，不管何时都能保证拿到的是最新的状态
