@@ -1,34 +1,34 @@
-### 1.手写call/apply
+### 1.手写 call/apply
 
 ```js
 Function.prototype.lvCall = function (context) {
   if (typeof this != "function") {
-    throw new Error("there need a function")
+    throw new Error("there need a function");
   }
-  context = context || window
-  const arg = [...arguments].slice(1)
-  context.fn = this
-  const result = context.fn(...arg)
-  delete context.fn
-  return result
-}
+  context = context || window;
+  const arg = [...arguments].slice(1);
+  context.fn = this;
+  const result = context.fn(...arg);
+  delete context.fn;
+  return result;
+};
 
 Function.prototype.lvApply = function (context) {
   if (typeof this != "function") {
-    throw new Error("there need a fusnction")
+    throw new Error("there need a function");
   }
-  context = context || window
-  context.fn = this
-  let arg = arguments[1]
-  let result
+  context = context || window;
+  context.fn = this;
+  let arg = arguments[1];
+  let result;
   if (arg) {
-    result = context.fn(...arg)
+    result = context.fn(...arg);
   } else {
-    result = context.fn()
+    result = context.fn();
   }
-  delete context.fn
-  return result
-}
+  delete context.fn;
+  return result;
+};
 ```
 
 ### 2.深浅拷贝
@@ -40,13 +40,12 @@ Function.prototype.lvApply = function (context) {
 
 ```js
 function shallowClone(source) {
-  var newObj = {}
-  for(var i in source){
-    if(source.hasOwnProperty(i)){
-      newObj[i] = ssource[i]
+  var newObj = {};
+  for (var i in source) {
+    if (source.hasOwnProperty(i)) {
+      newObj[i] = ssource[i];
     }
   }
-  return newObj
+  return newObj;
 }
 ```
-
