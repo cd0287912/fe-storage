@@ -199,13 +199,18 @@ interface Point {
 }
 ```
 
-type 与 interface 两者最关键的差别在于类型别名本身无法添加新的属性，而接口是可以扩展的。
+type 与 interface 的区别:
+
+1. interface 通过 extends 继承扩展，type 通过 & 结合扩展
+2. interface 可以通过定义同名的方式新增字段，type 则不可以
 
 ### 类型断言
 
 ---
 
 有时候我们比 ts 编译器更知道一个值的类型，我们可以使用类型断言。
+
+断言表示更具体。
 
 ```ts
 const canvasDom = <HTMLCanvasElement>document.getElementById("#canva");
