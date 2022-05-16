@@ -101,3 +101,5 @@ age = "18";
 age.toUpperCase();
 age = true; // error
 ```
+
+###
