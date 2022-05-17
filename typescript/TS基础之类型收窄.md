@@ -102,4 +102,15 @@ age.toUpperCase();
 age = true; // error
 ```
 
-###
+### 控制流收窄
+
+```ts
+function padLeft(padding: number | string, input: string) {
+  if (typeof padding === "number") {
+    return new Array(padding + 1).join(" ") + input;
+  }
+  return padding + input;
+}
+```
+
+判断中进入第一个条件判断，有 return 语句，那么代码就不会往下执行。那么剩余代码的类型可判断为 `string` 。
