@@ -4,13 +4,13 @@
 - 若将一个对象赋值给 ref，那么这个对象将通过 reactive() 转为具有深层次响应性的对象。
 - 模板中不需要.value,会自动解包
 
-```js
+```vue
 <script setup lang="ts">
-import { ref } from "vue"
-let message = ref("hello")
+import { ref } from "vue";
+let message = ref("hello");
 const change = () => {
-  message.value = "word"
-}
+  message.value = "word";
+};
 </script>
 <template>
   <div>{{ message }}</div>
@@ -22,18 +22,18 @@ const change = () => {
 
 > 在 ref 中传入对象,底层会通过 reactive()进行转化，使其每个对象属性具有响应式，若不想每个对象都具有响应式，节约性能，那么则使用 shallowRef，shallowRef 不会深层次的递归使其每个属性转为响应式，只会对象本身具有响应式
 
-```js
+```vue
 <script setup lang="ts">
-import { shallowRef } from "vue"
+import { shallowRef } from "vue";
 let user = shallowRef({
   name: "张三",
-})
+});
 const change = () => {
   // user.value.name = "李四"   //not valid
   user.value = {
     name: "李四",
-  }
-}
+  };
+};
 </script>
 <template>
   <div>{{ user.name }}</div>
@@ -49,20 +49,20 @@ const change = () => {
 
 > 创建一个自定义的 ref，显式声明对其依赖追踪和更新触发的控制方式。
 
-```js
+```vue
 function myRef<T>(value: T) {
   return customRef((trank, trigger) => {
     return {
       get() {
-        trank()
-        return value
+        trank();
+        return value;
       },
       set(newValue: T) {
-        value = newValue
-        trigger()
+        value = newValue;
+        trigger();
       },
-    }
-  })
+    };
+  });
 }
 ```
 
