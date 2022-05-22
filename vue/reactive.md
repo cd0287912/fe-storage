@@ -4,17 +4,17 @@
 自动解包任何 ref 的属性，并保持响应性，除了响应式数组或 Map 这样原生集合类型中为 ref 的元素时，不会解包，仍需.value
 
 ```js
-const age = ref(20)
+const age = ref(20);
 const user = reactive({
   name: "张三",
   age,
-})
+});
 
 const change = () => {
-  user.name = "李四"
-  age.value++
-  console.log(user) // 李四  21
-}
+  user.name = "李四";
+  age.value++;
+  console.log(user); // 李四  21
+};
 ```
 
 ### readonly()
