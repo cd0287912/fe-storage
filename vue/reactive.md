@@ -17,10 +17,78 @@ const change = () => {
 };
 ```
 
+### shallowReactive()
+
+接收复杂数据类型。对浅层的属性生成响应式的转换,对深层次的属性不具备响应式。
+
+```js
+const person = shallowReactive({
+  name: "mike",
+  hobby: ["work", "game"],
+  job: {
+    j1: {
+      name: "IT",
+    },
+  },
+});
+function change() {
+  person.name = "alan";
+}
+function changeHobby() {
+  person.hobby[0] = "xxx"; // not work
+}
+function changeJon() {
+  person.job.j1.name = "teacher"; // not work
+}
+```
+
 ### readonly()
 
 接受一个对象（不论是响应式还是一般的）或是一个 ref，返回一个原值的只读代理
 
-### shallowReactive()
+```js
+let person = reactive({
+  name: "mike",
+  age: 18,
+  job: {
+    j1: {
+      name: "IT",
+    },
+  },
+});
+person = readonly(person);
+function change() {
+  person.name = "alan"; //not work
+}
+```
 
-接收复杂数据类型。对浅层的属性生成响应式的转换,对深层次的属性不具备响应式。
+```js
+let person = ref("mike");
+person = readonly(person);
+function change() {
+  person.value = "alan"; //not work
+}
+```
+
+### shallowReadonly()
+
+与 readonly 类型，它是浅层次的只读。
+
+```js
+let person = reactive({
+  name: "mike",
+  age: 18,
+  job: {
+    j1: {
+      name: "IT",
+    },
+  },
+});
+person = shallowReadonly(person);
+function change() {
+  person.name = "alan"; //not work
+}
+function changeJob() {
+  person.job.j1.name = "alan"; //work
+}
+```

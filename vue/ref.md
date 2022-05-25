@@ -41,7 +41,7 @@ let user = shallowRef({
   name: "张三",
 });
 const change = () => {
-  // user.value.name = "李四"   //not valid
+  // user.value.name = "李四"   //not work
   user.value = {
     name: "李四",
   };
