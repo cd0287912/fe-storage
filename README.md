@@ -11,12 +11,5 @@ vue
 react
 react-native
 
-基础:
-js
-ts
-css
-
-其他：
-微信小程序
-数据结构
-算法
+数据结构算法
+ts 设计模式
